@@ -2,6 +2,8 @@ import discord
 from discord.ext import commands
 import os
 import contextlib
+from dotenv import load_dotenv
+load_dotenv()
 import io
 import textwrap
 
@@ -58,4 +60,4 @@ async def eval(ctx, *, code):
     await ctx.send(f'{ctx.author.mention}, your eval has been run and sent to the console!')
 
 
-client.run('ODIxMTY3Njc2Mzk4NjMyOTgw.YE_x_g.4fMiB7kxwxHPC-9NAq4VhPsUH00')
+client.run(os.getenv('TOKEN'))
