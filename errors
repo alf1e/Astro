@@ -1,16 +1,8 @@
-Command raised an exception: KeyError: '<built-in function id>'
-Command raised an exception: NameError: name 'embed' is not defined
-Command raised an exception: AttributeError: 'Embed' object has no attribute 'seet_author'
-Command raised an exception: JSONDecodeError: Expecting value: line 1 column 1 (char 0)
-Command raised an exception: TypeError: Object of type set is not JSON serializable
-Command raised an exception: AttributeError: 'Member' object has no attribute 'author'
-Command raised an exception: TypeError: Object of type set is not JSON serializable
-Command raised an exception: JSONDecodeError: Expecting value: line 1 column 37 (char 36)
-Command raised an exception: TypeError: Object of type set is not JSON serializable
-Command raised an exception: JSONDecodeError: Expecting value: line 1 column 37 (char 36)
-Command raised an exception: TypeError: Object of type Member is not JSON serializable
-Command raised an exception: TypeError: edit() takes 1 positional argument but 2 were given
-Command raised an exception: TypeError: edit() takes 1 positional argument but 2 were given
-Command "bal" is not found
-Command "configurator" is not found
-Command raised an exception: OSError: [Errno 8] Exec format error
+Command raised an exception: TypeError: Expected discord.Colour, int, or Embed.Empty but received str instead.
+Command raised an exception: NameError: name 'red' is not defined
+Command raised an exception: NameError: name 'Red' is not defined
+Command raised an exception: NameError: name 'self' is not defined
+Command raised an exception: FileNotFoundError: [Errno 2] No such file or directory: 'premium.jsom'
+Command raised an exception: FileNotFoundError: [Errno 2] No such file or directory: 'premium.jsom'
+Command raised an exception: NameError: name 'data' is not defined
+Command raised an exception: TypeError: '_io.TextIOWrapper' object is not subscriptable

@@ -5,7 +5,10 @@ import contextlib
 from dotenv import load_dotenv
 load_dotenv()
 import io
+import json
 import textwrap
+import sys
+from sysfunc import *
 
 file1 = open("prefix", "r")
 verify = file1.read()
@@ -18,12 +21,17 @@ client = commands.Bot(command_prefix = f"{verify}")
 async def on_ready():
   ready = client.get_channel(820771240561475635)
   await client.change_presence(status=discord.Status.online, activity=discord.Game(name='d.'))
+
   print('We have logged in as {0.user}'.format(client))
+  print(f"======================================")
+
   client.load_extension("cogs.configurator")
   client.load_extension("cogs.quote")
+  client.load_extension("jishaku")
   client.load_extension("cogs.error")
   client.load_extension("cogs.economy.work")
   client.load_extension("cogs.economy.profile")
+  client.load_extension("cogs.economy.shop")
   loaded = discord.Embed(
     colour = discord.Colour.orange()
     )
@@ -58,6 +66,46 @@ async def eval(ctx, *, code):
   if id == '677252870722027549':
     eval(code)
     await ctx.send(f'{ctx.author.mention}, your eval has been run and sent to the console!')
+
+@client.command()
+@commands.is_owner()
+async def premiserv(ctx, servid):
+  with open("premium.json", "r+") as f:
+    data = json.load(f)
+    f.seek(0)
+    data['premium_servers'].append(servid)
+    json.dump(data,f)
+    await ctx.message.add_reaction('✅')
+
+@client.command()
+@commands.is_owner()
+async def premiuser(ctx, servid):
+  with open("premium.json", "r+") as f:
+    data = json.load(f)
+    f.seek(0)
+    data['premium_users'].append(servid)
+    json.dump(data,f)
+    await ctx.message.add_reaction('✅')
+
+@client.command()
+@commands.is_owner()
+async def error(ctx):
+  await ctx.reply("Doing le error")
+  raise Exception(f"Le Fake error of {ctx.author.name}")
+
+@client.command()
+@commands.is_owner()
+async def restart(ctx):
+  embed = discord.Embed(title="Restarting!", description="Cya later!")
+  embed.set_footer(text=f"Requested by {ctx.author.name}", icon_url=ctx.author.avatar_url)
+  await ctx.reply(embed=embed)
+  os.execv(sys.executable, ['python'] + sys.argv)
+
+@client.command()
+@commands.is_owner()
+async def test(ctx):
+  await premi_check_serv(ctx)
+  await ctx.send('yes dis thingy')
 
 
 client.run(os.getenv('TOKEN'))

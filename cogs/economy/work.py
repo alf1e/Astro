@@ -68,7 +68,7 @@ class economy(commands.Cog):
             await setup_profile(self, ctx.author)
             await add_has_worked(self, ctx.author, money_to_get)
 
-    @commands.command()
+    @commands.command(no_pm=True)
     async def balance(self, ctx, member: discord.Member = None):
         if not member:
             id = ctx.message.author.id

@@ -66,6 +66,13 @@ class configurator(commands.Cog):
                 setto = file1.read().splitlines()
                 await ctx.send(f'Prefix has been set to `{setto}! performing a restart to update the prefix`')
                 os.execv(sys.executable, ['python'] + sys.argv)
+        elif configurator == 'jishaku':
+            if action == 'unload':
+                await ctx.send('unloaded cog `JISHAKU`')
+                self.bot.unload_extension('jishaku')
+            elif action == 'load':
+                await ctx.send('loaded cog `JISHAKU`')
+                self.bot.load_extension('jishaku')
 
         
 
