@@ -1,8 +1,0 @@
-Command raised an exception: TypeError: Expected discord.Colour, int, or Embed.Empty but received str instead.
-Command raised an exception: NameError: name 'red' is not defined
-Command raised an exception: NameError: name 'Red' is not defined
-Command raised an exception: NameError: name 'self' is not defined
-Command raised an exception: FileNotFoundError: [Errno 2] No such file or directory: 'premium.jsom'
-Command raised an exception: FileNotFoundError: [Errno 2] No such file or directory: 'premium.jsom'
-Command raised an exception: NameError: name 'data' is not defined
-Command raised an exception: TypeError: '_io.TextIOWrapper' object is not subscriptable
