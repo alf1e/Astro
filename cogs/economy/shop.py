@@ -36,7 +36,7 @@ class shop(commands.Cog):
                         json.dump(users, f)
                 else:
                     await ctx.reply('You dont meet the requirements!')
-            elif but == 'Book':
+            elif buy == 'Book':
                 if lvl > 10:
                     users[f'{ctx.author.id}']['balance'] -= 10
                     with open('money.json', 'w') as f:
