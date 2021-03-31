@@ -27,20 +27,42 @@ class shop(commands.Cog):
         else:
             with open('money.json', 'r') as f:
                 users = json.load(f)
+            with open("inventory.json", "r") as g:
+                inv = json.load(g)
+            if not str(ctx.author.id) in inv:
+                 inv[f'{ctx.author.id}'] = {}
+                 inv[f'{ctx.author.id}']["Book"] = 0
+                 inv[f'{ctx.author.id}']["Fishing_Rod"] = 0
+                 inv[f'{ctx.author.id}']["Laptop"] = 0
+                 inv[f'{ctx.author.id}']["Hunting_Rifle"] = 0
+                 inv[f'{ctx.author.id}']["Gun_License"] = 0
+                 inv[f'{ctx.author.id}']["Pet_dog"] = 0
+                 inv[f'{ctx.author.id}']["Pet_cat"] = 0
+                 inv[f'{ctx.author.id}']["Pet_license"] = 0
+                 with open('money.json', 'w') as g:
+                        json.dump(inv, g)
             lvl = users[f"{ctx.author.id}"]['balance']
 
             if buy == 'Fishing Rod':
                 if lvl > 30:
                     users[f'{ctx.author.id}']['balance'] -= 30
+                    inv[f"{ctx.author.id}"]['Fishing_Rod'] += 1
                     with open('money.json', 'w') as f:
                         json.dump(users, f)
+                    with open('inventory.json', 'w') as g:
+                        json.dump(inv, g)
+                    await ctx.reply('Done')
                 else:
                     await ctx.reply('You dont meet the requirements!')
             elif buy == 'Book':
                 if lvl > 10:
                     users[f'{ctx.author.id}']['balance'] -= 10
+                    inv[f"{ctx.author.id}"]['Book'] += 1
                     with open('money.json', 'w') as f:
                         json.dump(users, f)
+                    with open('inventory.json', 'w') as g:
+                        json.dump(inv, g)
+                    await ctx.reply("Done")
                 else:
                     await ctx.reply('You dont meet the requirements!')
     

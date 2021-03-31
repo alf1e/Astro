@@ -9,6 +9,7 @@ class economy(commands.Cog):
         self.bot = client
 
     @commands.command()
+    @commands.cooldown(1, 120, commands.BucketType.user)
     async def work(self, ctx):
         await ctx.send('Loading...')
 
@@ -56,19 +57,25 @@ class economy(commands.Cog):
 
         sentance = random.choice(pre_sentance)
 
-        await ctx.send(content=f'Send the sentance `{sentance}`')
-        await asyncio.sleep(2)
-        await ctx.channel.purge(limit=1)
+        def check(message):
+            if message.author == ctx.author:
+                return True
+
+        sentence_message = await ctx.send(content=f'Send the sentance `{sentance}`')
+        await asyncio.sleep(0.5)
+        await sentence_message.delete()
         await ctx.send(content='GO!')
-        user_sentaance = await self.bot.wait_for('message')
+        user_sentaance = await self.bot.wait_for('message', check=check)
         if user_sentaance.content == sentance:
             await ctx.send(f'GREAT JOB {ctx.author.mention}, you were awarded {money_to_get} coins for your efforts!')
             await setup_money(self, ctx.author)
             await add_money(self, ctx.author, money_to_get)
             await setup_profile(self, ctx.author)
             await add_has_worked(self, ctx.author, money_to_get)
+        else:
+            await ctx.send(f'`{user_sentaance.content}` is incorrect the correct one was `{sentance}`!')
 
-    @commands.command(no_pm=True)
+    @commands.command(no_pm=True, aliases=["bal"])
     async def balance(self, ctx, member: discord.Member = None):
         if not member:
             id = ctx.message.author.id

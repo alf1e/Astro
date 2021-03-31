@@ -7,7 +7,7 @@ class configurator(commands.Cog):
         self.bot = client
 
     @commands.command()
-    @commands.has_permissions(manage_messages=True)
+    @commands.is_owner()
     async def config(self, ctx, configurator=None, action=None, actionconfigurator=None, actionconfigurator2=None):
         if configurator == 'None':
             await ctx.send('`CONFIGURATOR` is a required argument!')

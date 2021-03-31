@@ -24,7 +24,7 @@ class profile(commands.Cog):
         has_worked = users[str(id)]['JobsAttempted']
 
         if publishness == 1:
-            await ctx.send('This profile is private!')
+            await msg.edit(content='This profile is private!')
         else:
             embed.set_author(name="Your profile!")
             embed.add_field(name=f"**{username}**", value="\u200b", inline=False)

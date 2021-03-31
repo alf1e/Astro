@@ -1,14 +1,12 @@
 import discord 
 from discord.ext import commands
 import os
-import contextlib
 from dotenv import load_dotenv
 load_dotenv()
 import io
 import json
-import textwrap
 import sys
-from sysfunc import *
+from func.sysfunc import *
 
 file1 = open("prefix", "r")
 verify = file1.read()
@@ -20,7 +18,7 @@ client = commands.Bot(command_prefix = f"{verify}")
 @client.event
 async def on_ready():
   ready = client.get_channel(820771240561475635)
-  await client.change_presence(status=discord.Status.online, activity=discord.Game(name='d.'))
+  await client.change_presence(status=discord.Status.online, activity=discord.Game(name=f'{verify}help'))
 
   print('We have logged in as {0.user}'.format(client))
   print(f"======================================")
@@ -43,12 +41,10 @@ async def on_ready():
   await ready.send(embed=loaded)
 
 @client.command()
-@commands.has_permissions(manage_messages=True)
+@commands.is_owner()
 async def shutdown(ctx):
   await ctx.send('Shutting down!')
-  preshut = discord.Embed(
-    colour = discord.Colour.orange()
-    )
+  preshut = discord.Embed()
   chnl = client.get_channel(820771240561475635)
   preshut.set_author(name='Shutting down!')
   await chnl.send(embed=preshut)
@@ -59,13 +55,6 @@ async def shutdown(ctx):
   await chnl.send(embed=shut)
   await client.change_presence(status=discord.Status.offline, activity=discord.Game(name='Offline'))
   exit()
-
-@client.command()
-async def eval(ctx, *, code):
-  id = str(ctx.author.id)
-  if id == '677252870722027549':
-    eval(code)
-    await ctx.send(f'{ctx.author.mention}, your eval has been run and sent to the console!')
 
 @client.command()
 @commands.is_owner()
@@ -100,12 +89,5 @@ async def restart(ctx):
   embed.set_footer(text=f"Requested by {ctx.author.name}", icon_url=ctx.author.avatar_url)
   await ctx.reply(embed=embed)
   os.execv(sys.executable, ['python'] + sys.argv)
-
-@client.command()
-@commands.is_owner()
-async def test(ctx):
-  await premi_check_serv(ctx)
-  await ctx.send('yes dis thingy')
-
 
 client.run(os.getenv('TOKEN'))
