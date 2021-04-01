@@ -81,7 +81,7 @@ class shop(commands.Cog):
                 users = json.load(f)
             lvl = users[str(id)]
             await ctx.send(f'We are currently working on a translator for this!')
-            await ctx.send(f'```{lvl}```')
+            await ctx.send(f'```json{lvl}```')
 
 
 

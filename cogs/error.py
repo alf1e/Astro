@@ -1,4 +1,6 @@
 from discord.ext import commands
+import munch
+import discord
 
 class error(commands.Cog):
     def __init__(self, client):
@@ -9,8 +11,9 @@ class error(commands.Cog):
         file = open("errors", "a")
         file.write(f'{error}' + '\n')
         file.close()
-        await ctx.send('UhOh an error has occured!')
-        await ctx.send(f'`{error}`')
+        embed = discord.Embed(title="An error has occurred", description=f"```{error}```")
+        embed.set_footer(text=f"Caused by {ctx.author.name}", icon_url=ctx.author.avatar_url)
+        await ctx.reply(embed=embed)
     
 
 

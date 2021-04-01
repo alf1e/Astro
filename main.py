@@ -13,7 +13,7 @@ verify = file1.read()
 file1.close()
 
 client = commands.Bot(command_prefix = f"{verify}")
-#client.remove_command('help')
+client.remove_command('help')
 
 @client.event
 async def on_ready():
@@ -26,10 +26,12 @@ async def on_ready():
   client.load_extension("cogs.configurator")
   client.load_extension("cogs.quote")
   client.load_extension("jishaku")
+  client.load_extension("cogs.premium")
   client.load_extension("cogs.error")
   client.load_extension("cogs.economy.work")
   client.load_extension("cogs.economy.profile")
   client.load_extension("cogs.economy.shop")
+  client.load_extension("cogs.help")
   loaded = discord.Embed(
     colour = discord.Colour.orange()
     )
